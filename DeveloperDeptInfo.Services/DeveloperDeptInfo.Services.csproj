@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DeveloperDeptInfo.DataAccess.Dapper\DeveloperDeptInfo.DataAccess.Dapper.csproj" />
+    <ProjectReference Include="..\DeveloperDeptInfo.Domain\DeveloperDeptInfo.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
