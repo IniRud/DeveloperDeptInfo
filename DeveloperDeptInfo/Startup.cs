@@ -1,3 +1,6 @@
+using DeveloperDeptInfo.DataAccess.Dapper;
+using DeveloperDeptInfo.Domain;
+using DeveloperDeptInfo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +31,8 @@ namespace DeveloperDeptInfo
         {
 
             services.AddControllers();
+            services.AddScoped<IDeveloperService, DeveloperService>();
+            services.AddScoped<IDeveloperRepository, DeveloperRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DeveloperDeptInfo", Version = "v1" });

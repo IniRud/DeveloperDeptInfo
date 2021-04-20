@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DeveloperDeptInfo.DataAccess.Dapper
 {
-    class DeveloperRepository: IDeveloperRepository
+    public class DeveloperRepository: IDeveloperRepository
     {
         protected readonly IConfiguration _config; 
 
@@ -63,48 +63,51 @@ namespace DeveloperDeptInfo.DataAccess.Dapper
 
         public async Task<IEnumerable<Developer>> GetAllDeveloperAsync()
         {
-            try 
-            {
+           // try 
+           // {
                 using (IDbConnection dbConnection = Connection)
                 {
                     dbConnection.Open();
                     string query = @"SELECT Id, DeveloperName, Email, Department, JoinDate FROM Developer";
-                    return await dbConnection.QueryAsync<Developer>(query);
+                    var result = await dbConnection.QueryAsync<Developer>(query);
+                    return result;
                 }
-            } 
-            catch (Exception ex) 
-            {
-                Console.WriteLine(ex);
-            }
+                
+           // } 
+            //catch (Exception ex) 
+            //{
+            //    Console.WriteLine(ex);
+            //}
+            
         }
 
         public async Task<Developer> GetDeveloperByEmail(string Email)
         {
-            try 
-            {
+           // try 
+          //  {
                 using (IDbConnection dbConnection = Connection)
                 {
                     dbConnection.Open();
-                    string query = @"SELECT FROM Developer WHERE Email = @Email";
-                    return await dbConnection.QueryFirstOrDefaultAsync(query, new { Email = @Email});
+                    string query = "SELECT * FROM Developer WHERE Email=@Email";
+                    return await dbConnection.QueryFirstOrDefaultAsync<Developer>(query, new { Email = @Email});
                 }
-            }
-            catch (Exception ex) { Console.WriteLine(ex); }
+           // }
+           // catch (Exception ex) { Console.WriteLine(ex); }
         }
 
         public async Task<Developer> GetDeveloperByIdAsync(int Id)
         {
-            try 
-            {
+           // try 
+           // {
                 using(IDbConnection dbConnection = Connection)
                 {
                     dbConnection.Open();
-                    string query = @"SELECT * FROM Developer WHERE Id = @Id";
+                    string query = "SELECT * FROM Developer WHERE Id = @Id";
                     return await dbConnection.QueryFirstOrDefaultAsync<Developer>(query, new { Id = @Id });
 
                 }
-            }
-            catch (Exception ex) { Console.WriteLine(ex); }
+           // }
+           // catch (Exception ex) { Console.WriteLine(ex); }
         }
 
         public void UpdateDeveloper(Developer developer)
